@@ -1,6 +1,6 @@
 # Things to Add or Update
 
-1. Add lap times underneath timer. DONE BUT NOT FULLY WORKING. NEED IT TO SHOW EACH LAP NOT JUST THE MOST CURRENT ONE.
+1. Show each lap underneath timer not just one lap that gets updated for each lap.
 2. Make the timer show as 00:00:00 and remove the seconds label - in progress
 
 # Getting Started with Create React App

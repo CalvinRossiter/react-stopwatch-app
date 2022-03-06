@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 const Timer = () => {
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [lap, setLap] = useState(0);
+  const [lapTime, setLapTime] = useState(0);
   const [startBtnColor, setStartButtonColor] = useState('#51c26f');
 
   // toggles if the timer is running
@@ -14,7 +16,27 @@ const Timer = () => {
   function resetTimer() {
     setSeconds(0);
     setIsActive(false);
+    setLap(0);
+    setLapTime(0);
   }
+
+  // sets the lap number and time of the lap
+  function lapInfo() {
+    if (isActive) {
+      setLapTime(seconds);
+      setLap(lap + 1);
+      postLapTime(lap, lapTime);
+    }
+  }
+
+  // posts the lap and time to the page
+  const postLapTime = (lap, lapTime) => {
+    return (
+      <li>
+        { lap === 0 ? '' : `Lap ${lap}: ${lapTime} seconds` }
+      </li>
+    );
+  };
 
   // what updates the timer every second
   useEffect(() => {
@@ -59,12 +81,22 @@ const Timer = () => {
           { isActive ? 'Pause' : 'Start'}
         </button>
         <button
+          className='lapButton'
+          onClick={lapInfo}
+        >
+          Lap
+        </button>
+        <button
           className='resetButton'
           onClick={resetTimer}
           style={{backgroundColor: '#5280d1'}}
         >
           Reset
         </button>
+      </div>
+      <div>
+        <h3 className='lapHeader'>Lap Times</h3>
+        <ol>{postLapTime(lap, lapTime)}</ol>
       </div>
     </div>
   );
