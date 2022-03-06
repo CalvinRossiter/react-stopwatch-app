@@ -21,16 +21,15 @@ const Timer = () => {
   }
 
   // sets the lap number and time of the lap
-// this is causing an issue. maybe causing a recursive function
   function lapInfo() {
     if (isActive) {
       setLapTime(seconds);
       setLap(lap + 1);
-      postLapTime(lap, lapTime); //this is the line causing the issue since the function is calling itself
+      postLapTime(lap, lapTime);
     }
   }
 
-  // calculates lap number and lap time and posts it to the page
+  // posts the lap and time to the page
   const postLapTime = (lap, lapTime) => {
     return (
       <li>
@@ -38,7 +37,6 @@ const Timer = () => {
       </li>
     );
   };
-  // maybe I need to have a state array that I add to within a use effect that will re-render each time the lap button is clicked
 
   // what updates the timer every second
   useEffect(() => {
@@ -98,7 +96,7 @@ const Timer = () => {
       </div>
       <div>
         <h3 className='lapHeader'>Lap Times</h3>
-        <ul>{postLapTime(lap, lapTime)}</ul>
+        <ol>{postLapTime(lap, lapTime)}</ol>
       </div>
     </div>
   );
