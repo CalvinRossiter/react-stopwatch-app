@@ -5,6 +5,7 @@ const Timer = () => {
   const [isActive, setIsActive] = useState(false);
   const [lap, setLap] = useState(0);
   const [lapTime, setLapTime] = useState(0);
+  const [laps, setLaps] = useState([]);
   const [startBtnColor, setStartButtonColor] = useState('#51c26f');
 
   // toggles if the timer is running
@@ -17,6 +18,7 @@ const Timer = () => {
     setSeconds(0);
     setIsActive(false);
     setLap(0);
+    setLaps([]);
     setLapTime(0);
   }
 
@@ -25,18 +27,21 @@ const Timer = () => {
     if (isActive) {
       setLapTime(seconds);
       setLap(lap + 1);
-      postLapTime(lap, lapTime);
     }
   }
 
-  // posts the lap and time to the page
-  const postLapTime = (lap, lapTime) => {
-    return (
-      <li>
-        { lap === 0 ? '' : `Lap ${lap}: ${lapTime} seconds` }
-      </li>
-    );
-  };
+  // what posts the laps each time the lap button is pressed
+  useEffect(() => {
+    if (isActive && lap >= 1) {
+      setLaps((laps) => [
+        ...laps,
+        {
+          lap: lap,
+          lapTime: lapTime,
+        }
+      ])
+    }
+  },[lap, lapTime, isActive])
 
   // what updates the timer every second
   useEffect(() => {
@@ -96,7 +101,15 @@ const Timer = () => {
       </div>
       <div>
         <h3 className='lapHeader'>Lap Times</h3>
-        <ol>{postLapTime(lap, lapTime)}</ol>
+        <ul>
+          {
+            laps.map(l => 
+              <li key={l.lap}>
+                {`Lap ${l.lap}: ${l.lapTime} seconds`}
+              </li>
+            )
+          }
+        </ul>
       </div>
     </div>
   );
