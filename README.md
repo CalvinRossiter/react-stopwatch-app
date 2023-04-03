@@ -1,7 +1,7 @@
 # Things to Add or Update
 
-1. Show each lap underneath timer not just one lap that gets updated for each lap.
-2. Make the timer show as 00:00:00 and remove the seconds label - in progress
+1. Make the timer show as 00:00:00 and remove the seconds label - in progress
+2. Add an input box for adding a goal time per lap. If goal is met, make lap and lap time green. If goal is not met, make lap and lap time red
 
 # Getting Started with Create React App
 
