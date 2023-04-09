@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 const Timer = () => {
-  const [seconds, setSeconds] = useState(0);
+  const [time, setTime] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [lap, setLap] = useState(0);
-  const [lapTime, setLapTime] = useState(0);
+  const [lapTime, setLapTime] = useState("");
   const [laps, setLaps] = useState([]);
   const [startBtnColor, setStartButtonColor] = useState('#51c26f');
 
@@ -15,17 +15,21 @@ const Timer = () => {
 
   // resets the entire app
   function resetTimer() {
-    setSeconds(0);
+    setTime(0);
     setIsActive(false);
     setLap(0);
     setLaps([]);
-    setLapTime(0);
+    setLapTime("");
   }
 
   // sets the lap number and time of the lap
   function lapInfo() {
     if (isActive) {
-      setLapTime(seconds);
+      setLapTime(hours.toString().padStart(2, "0") + ':' +
+                 minutes.toString().padStart(2, "0") + ':' +
+                 seconds.toString().padStart(2, "0") + ':' +
+                 milliseconds.toString().padStart(2, "0")
+      );
       setLap(lap + 1);
     }
   }
@@ -47,14 +51,13 @@ const Timer = () => {
   useEffect(() => {
     let interval = null;
     if (isActive) {
-      interval = setInterval(() => {
-        setSeconds(seconds => seconds + 1);
-      }, 1000);
-    } else if (!isActive && seconds !== 0) {
+      interval = setInterval(() =>
+        setTime(time + 1), 10);
+    } else if (!isActive && time !== 0) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, seconds]);
+  }, [isActive, time]);
 
   // updates the color of the Start/Pause button depending on if the timer is active
   useEffect(() => {
@@ -66,16 +69,18 @@ const Timer = () => {
   }, [isActive]);
 
   // formatting to make the timer as 00:00:00:00
-  // let centiseconds = ("0" + (Math.floor(seconds / 10) % 100)).slice(-2);
-  // let secs = ("0" + (Math.floor(seconds / 1000) % 60)).slice(-2);
-  // let minutes = ("0" + (Math.floor(seconds / 60000) % 60)).slice(-2);
-  // let hours = ("0" + Math.floor(seconds / 3600000)).slice(-2);
+  let hours = Math.floor(time / 360000);
+  let minutes = Math.floor((time % 360000) / 6000);
+  let seconds = Math.floor((time % 6000) / 100);
+  let milliseconds = time % 100;
 
   return(
     <div className='app'>
       <div className='timer'>
-        {seconds}s
-        {/*{hours}:{minutes}:{secs}:{centiseconds}*/}
+        {hours.toString().padStart(2, "0")}:
+        {minutes.toString().padStart(2, "0")}:
+        {seconds.toString().padStart(2, "0")}:
+        {milliseconds.toString().padStart(2, "0")}
       </div>
       <div className='row'>
         <button
@@ -105,7 +110,7 @@ const Timer = () => {
           {
             laps.map(l => 
               <li key={l.lap}>
-                {`Lap ${l.lap}: ${l.lapTime} seconds`}
+                {`Lap ${l.lap}: ${l.lapTime}`}
               </li>
             )
           }
