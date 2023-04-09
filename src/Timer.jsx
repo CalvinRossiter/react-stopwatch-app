@@ -27,7 +27,7 @@ const Timer = () => {
     if (isActive) {
       setLapTime(hours.toString().padStart(2, "0") + ':' +
                  minutes.toString().padStart(2, "0") + ':' +
-                 secs.toString().padStart(2, "0") + ':' +
+                 seconds.toString().padStart(2, "0") + ':' +
                  milliseconds.toString().padStart(2, "0")
       );
       setLap(lap + 1);
@@ -71,7 +71,7 @@ const Timer = () => {
   // formatting to make the timer as 00:00:00:00
   let hours = Math.floor(time / 360000);
   let minutes = Math.floor((time % 360000) / 6000);
-  let secs = Math.floor((time % 6000) / 100);
+  let seconds = Math.floor((time % 6000) / 100);
   let milliseconds = time % 100;
 
   return(
@@ -79,7 +79,7 @@ const Timer = () => {
       <div className='timer'>
         {hours.toString().padStart(2, "0")}:
         {minutes.toString().padStart(2, "0")}:
-        {secs.toString().padStart(2, "0")}:
+        {seconds.toString().padStart(2, "0")}:
         {milliseconds.toString().padStart(2, "0")}
       </div>
       <div className='row'>
