@@ -1,6 +1,7 @@
 # Things to Add or Update
 
 1. Fix issue where if you hit the lap button then pause the timer then start again it adds another lap with same lap number and time as the lap before
+    - seems to be because of two children having the same key
 2. Add better styling such as Ant Design https://ant.design/
 3. Add an input box for adding a goal time per lap. If goal is met, make lap and lap time green. If goal is not met, make lap and lap time red
 4. Add Jest testing
