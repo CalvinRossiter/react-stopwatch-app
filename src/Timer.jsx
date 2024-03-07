@@ -7,6 +7,7 @@ const Timer = () => {
   const [lapTime, setLapTime] = useState("");
   const [laps, setLaps] = useState([]);
   const [startBtnColor, setStartButtonColor] = useState('#51c26f');
+  const [lapTextColor, setLapTextColor] = useState('#17ff55');
 
   // toggles if the timer is running
   function toggleActive() {
@@ -70,6 +71,13 @@ const Timer = () => {
     }
   }, [isActive]);
 
+  // updates the color of the lap text depending on if the time beats the goal time
+  // useEffect(() => {
+  //   if (lapTime > goalLapTime){
+  //     setLapTextColor('#ff1900');
+  //   }
+  // }, []);
+
   // formatting to make the timer as 00:00:00:00
   let hours = Math.floor(time / 360000);
   let minutes = Math.floor((time % 360000) / 6000);
@@ -107,11 +115,18 @@ const Timer = () => {
         </button>
       </div>
       <div>
+        <input
+          name='goalInput'
+          defaultValue='00:00:00:00'
+        />
         <h3 className='lapHeader'>Lap Times</h3>
         <ul>
           {
             laps.map(l => 
-              <li key={l.lap}>
+              <li 
+                key={l.lap}
+                style={{color: `${lapTextColor}`}}
+              >
                 {`Lap ${l.lap}: ${l.lapTime}`}
               </li>
             )

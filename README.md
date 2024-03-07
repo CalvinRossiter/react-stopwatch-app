@@ -1,8 +1,9 @@
 # Things to Add or Update
 
 1. Add an input box for adding a goal time per lap. If goal is met, make lap and lap time green. If goal is not met, make lap and lap time red
-2. Add better styling such as Ant Design https://ant.design/
-3. Add Jest testing
+2. Split out buttons and other things to own file that can be
+3. Add better styling such as Ant Design https://ant.design/
+4. Add Jest testing
 
 # Getting Started with Create React App
 
