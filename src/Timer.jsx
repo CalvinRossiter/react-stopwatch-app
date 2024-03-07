@@ -35,6 +35,7 @@ const Timer = () => {
   }
 
   // what posts the laps each time the lap button is pressed
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (isActive && lap >= 1) {
       setLaps((laps) => [
@@ -45,7 +46,8 @@ const Timer = () => {
         }
       ])
     }
-  },[lap, lapTime, isActive])
+  },[lap, lapTime])
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   // what updates the timer every second
   useEffect(() => {

@@ -1,9 +1,8 @@
 # Things to Add or Update
 
-1. Fix issue where if you hit the lap button then pause the timer then start again it adds another lap with same lap number and time as the lap before
+1. Add an input box for adding a goal time per lap. If goal is met, make lap and lap time green. If goal is not met, make lap and lap time red
 2. Add better styling such as Ant Design https://ant.design/
-3. Add an input box for adding a goal time per lap. If goal is met, make lap and lap time green. If goal is not met, make lap and lap time red
-4. Add Jest testing
+3. Add Jest testing
 
 # Getting Started with Create React App
 
